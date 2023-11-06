@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  dev-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'dev-db'
+      MYSQL_USER: 'reddit_user'
+      MYSQL_PASSWORD: 'reddit_password'
+      MYSQL_ROOT_PASSWORD: 'reddit_root_password'
+    ports:
+      - '5435:5432'
+    expose:
+      - '3306'
+    networks:
+      - ldvhaase
+
+#  test-db:
+#    image: postgres:13
+#    ports:
+#      - 5435:5432
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: test
+#      POSTGRES_DB: nest
+#    networks:
+#      - ldvhaase
+networks:
+  ldvhaase:
