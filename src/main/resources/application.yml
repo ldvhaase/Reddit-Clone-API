@@ -1,0 +1,29 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/dev-db
+    username: root
+    password: reddit_root_password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#    initialize: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 25
+    username: 53cb48d6b4284a
+    password: b09df504ebbaa3
+    protocol: smtp
+logging:
+  config: classpath:log4j2.xml
+  level:
+    org.springframework.security.web: DEBUG

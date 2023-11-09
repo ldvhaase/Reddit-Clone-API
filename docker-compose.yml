@@ -9,7 +9,7 @@ services:
       MYSQL_PASSWORD: 'reddit_password'
       MYSQL_ROOT_PASSWORD: 'reddit_root_password'
     ports:
-      - '5435:5432'
+      - '3306:3306'
     expose:
       - '3306'
     networks:
