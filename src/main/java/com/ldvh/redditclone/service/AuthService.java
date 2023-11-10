@@ -1,19 +1,21 @@
 package com.ldvh.redditclone.service;
 
 import com.ldvh.redditclone.dto.RegisterRequest;
+import com.ldvh.redditclone.exception.RedditException;
 import com.ldvh.redditclone.model.NotificationEmail;
 import com.ldvh.redditclone.model.User;
 import com.ldvh.redditclone.model.VerificationToken;
 import com.ldvh.redditclone.repository.UserRepo;
 import com.ldvh.redditclone.repository.VerificationTokenRepo;
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -54,5 +56,19 @@ public class AuthService {
 
         verificationTokenRepo.save(verificationToken);
         return token;
+    }
+
+    public void verifyAccount(String token) {
+        Optional<VerificationToken> verificationToken = verificationTokenRepo.findByToken(token);
+        verificationToken.orElseThrow(() -> new RedditException("Invalid Token"));
+        fetchUserAndEnable(verificationToken.get());
+    }
+
+    @Transactional
+    private void fetchUserAndEnable(VerificationToken verificationToken) {
+        String username = verificationToken.getUser().getUsername();
+        User user = userRepo.findByUsername(username).orElseThrow(() -> new RedditException("User [" + username + "] not found"));
+        user.setEnabled(true);
+        userRepo.save(user);
     }
 }

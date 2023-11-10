@@ -22,8 +22,14 @@ public class AuthController {
         return ResponseEntity.ok("Registration Successful");
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test(){
-        return ResponseEntity.ok("test successful");
+//    @PostMapping("/signin")
+//    public ResponseEntity<String> signin(@RequestBody)
+
+    @GetMapping("/accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token){
+        authService.verifyAccount(token);
+        return ResponseEntity.ok("Account verified");
     }
+
+
 }
