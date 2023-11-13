@@ -1,14 +1,10 @@
 package com.ldvh.redditclone.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.*;
 import java.time.Instant;
 
 import static jakarta.persistence.FetchType.LAZY;
@@ -20,7 +16,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "token")
 public class VerificationToken {
-
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;

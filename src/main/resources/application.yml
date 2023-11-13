@@ -6,7 +6,6 @@ spring:
     username: root
     password: reddit_root_password
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 #    initialize: true
 
   jpa:
@@ -23,7 +22,12 @@ spring:
     username: 53cb48d6b4284a
     password: b09df504ebbaa3
     protocol: smtp
+  banner:
+    location: classpath:banner.txt
 logging:
   config: classpath:log4j2.xml
   level:
     org.springframework.security.web: DEBUG
+jwt-expiration-time: 900000
+jwt-public-key: classpath:app.pub
+jwt-private-key: classpath:app.key

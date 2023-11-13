@@ -1,24 +1,21 @@
 package com.ldvh.redditclone.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Builder
-@NoArgsConstructor(force = true)
 public class Vote {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -26,7 +23,7 @@ public class Vote {
 
     private VoteType voteType;
 
-    @NonNull
+    @NotNull
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "postId", referencedColumnName = "postId")
     private Post post;
